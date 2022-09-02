@@ -26,6 +26,32 @@ def summary_table(package: str) -> None:
     versions_table(data, package)
 
 
+def compare_table(packages: list) -> None:
+    packages_str = ','.join(packages)
+    queried_packages = []
+    
+    table = Table(title="Downloads Summary")
+
+    table.add_column("Name", justify="right", style="cyan", no_wrap=True)
+    table.add_column("Total", justify="right", style="cyan", no_wrap=True)
+    table.add_column("30 Days", style="magenta")
+    table.add_column("7 Days", justify="right", style="green")
+
+
+    for package in packages:
+        try:
+            data = stats(package)
+            table.add_row(package, data['total'], data['30_days'], data['7_days'])
+            queried_packages.append(package)
+        except Exception as e:
+            pass
+
+    packages_str = ', '.join(queried_packages)
+    print(f'Stats for packages: {packages_str}')
+    console = Console()
+    console.print(table)
+
+
 def versions_table(data: list, package: str) -> None:
     table = Table(title="Versions Summary")
 
@@ -44,5 +70,13 @@ def versions_table(data: list, package: str) -> None:
     console.print(table)
 
 def main():
-    summary_table(sys.argv[1])
+    if len(sys.argv) == 1:
+        sys.exit('Package args needed!')
+    if not sys.argv[1].startswith('--'):
+        summary_table(sys.argv[1])
+    if sys.argv[1].casefold() == '--compare':
+        if len(sys.argv) >= 3:
+            compare_table(sys.argv[2:])
+
+
     
