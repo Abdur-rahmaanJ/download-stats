@@ -11,6 +11,12 @@ $ download-stats shopyo
 
 ![](https://github.com/Abdur-RahmaanJ/download-stats/raw/stable/assets/download_stats.png)
 
+```
+$ download-stats --compare flask django fastapi
+```
+
+![](https://github.com/Abdur-RahmaanJ/download-stats/raw/stable/assets/compare.png)
+
 ## general
 
 ```python
