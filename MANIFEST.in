@@ -1,3 +1,5 @@
 recursive-include src/download_stats *
+recursive-include reqs *
+recursive-include assets *
 recursive-exclude __pycache__ *
-recursive-exclude ./sandbox *
+recursive-exclude sandbox *

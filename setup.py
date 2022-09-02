@@ -27,8 +27,6 @@ if sys.argv[-1] == "publish":  # requests
     sys.exit()
 
 
-print('////////////',find_packages(exclude=['contrib', 'docs', 'tests']), file=open('x.log', 'w+'))
-
 # Get the long description from the README file
 with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
