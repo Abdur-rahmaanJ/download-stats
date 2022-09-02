@@ -27,12 +27,22 @@ def stats(project: str) -> dict:
     userAgent = ua.random
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": userAgent})
-    with console.status("[bold green]Geeting content...") as status:
+    with console.status("[bold green]Getting content...") as status:
         driver.get(f'https://pepy.tech/project/{project}')
         time.sleep(5)
     elems = driver.find_elements('xpath', "//*[contains(@class,'MuiGrid-item')]")
+    # for i, e in enumerate(elems):
+    #     print(i, e.text)
+    by_version = [e for e in elems[19].text.split('\n')]
+
+    table_data = []
+    for i, x in enumerate(by_version):
+        if i >= 20:
+            table_data.append(by_version[i].split())
+
     return {
         'total': elems[5].text.replace(',',''),
         '30_days': elems[7].text.replace(',',''),
         '7_days': elems[9].text.replace(',',''),
+        'by_version': table_data
     }
