@@ -6,6 +6,7 @@ from selenium import webdriver
 from fake_useragent import UserAgent
 from rich.console import Console
 import time
+import sys
 
 console = Console()
 
@@ -30,15 +31,19 @@ def stats(project: str) -> dict:
     with console.status("[bold green]Getting content...") as status:
         driver.get(f'https://pepy.tech/project/{project}')
         time.sleep(5)
-    elems = driver.find_elements('xpath', "//*[contains(@class,'MuiGrid-item')]")
-    # for i, e in enumerate(elems):
-    #     print(i, e.text)
-    by_version = [e for e in elems[19].text.split('\n')]
 
-    table_data = []
-    for i, x in enumerate(by_version):
-        if i >= 20:
-            table_data.append(by_version[i].split())
+    try:
+        elems = driver.find_elements('xpath', "//*[contains(@class,'MuiGrid-item')]")
+        # for i, e in enumerate(elems):
+        #     print(i, e.text)
+        by_version = [e for e in elems[19].text.split('\n')]
+
+        table_data = []
+        for i, x in enumerate(by_version):
+            if i >= 20:
+                table_data.append(by_version[i].split())
+    except IndexError:
+        sys.exit('Package could not be loaded!')
 
     return {
         'total': elems[5].text.replace(',',''),
