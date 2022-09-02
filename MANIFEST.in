@@ -1,0 +1,3 @@
+recursive-include src/download_stats *
+recursive-exclude __pycache__ *
+recursive-exclude ./sandbox *
