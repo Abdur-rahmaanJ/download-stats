@@ -17,6 +17,11 @@ $ download-stats --compare flask django fastapi
 
 ![](https://github.com/Abdur-RahmaanJ/download-stats/raw/stable/assets/compare.png)
 
+
+```
+$ download-stats --self # same as `download-stats download-stats`
+```
+
 ## general
 
 ```python
