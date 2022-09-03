@@ -54,13 +54,15 @@ def compare_table(packages: list) -> None:
 
 def versions_table(data: list, package: str) -> None:
     table = Table(title="Versions Summary")
-
-    table.add_column(data['by_version'][0][0], justify="right", style="cyan", no_wrap=True)
-    table.add_column(data['by_version'][0][1], style="magenta")
-    table.add_column(data['by_version'][0][2], style="magenta")
-    table.add_column(data['by_version'][0][3], style="magenta")
-    table.add_column(data['by_version'][0][4], justify="right", style="green")
-    table.add_column(data['by_version'][0][5], justify="right", style="green")
+    if not data['by_version']:
+        sys.exit('Could not load by version stats!')
+    if len(data['by_version'][0]) >= 6:
+        table.add_column(data['by_version'][0][0], justify="right", style="cyan", no_wrap=True)
+        table.add_column(data['by_version'][0][1], style="magenta")
+        table.add_column(data['by_version'][0][2], style="magenta")
+        table.add_column(data['by_version'][0][3], style="magenta")
+        table.add_column(data['by_version'][0][4], justify="right", style="green")
+        table.add_column(data['by_version'][0][5], justify="right", style="green")
 
     for i, r in enumerate(data['by_version']):
         if i > 0:
@@ -77,6 +79,8 @@ def main():
     if sys.argv[1].casefold() == '--compare':
         if len(sys.argv) >= 3:
             compare_table(sys.argv[2:])
+    if sys.argv[1].casefold() == '--self':
+        summary_table('download-stats')
 
 
     

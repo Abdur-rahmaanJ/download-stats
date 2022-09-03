@@ -39,9 +39,13 @@ def stats(project: str) -> dict:
         by_version = [e for e in elems[19].text.split('\n')]
 
         table_data = []
+        start_version_collecting = False
         for i, x in enumerate(by_version):
-            if i >= 20:
+            if 'Sum' in by_version[i]:
+                start_version_collecting = True
+            if start_version_collecting:
                 table_data.append(by_version[i].split())
+
     except IndexError:
         sys.exit('Package could not be loaded!')
 
