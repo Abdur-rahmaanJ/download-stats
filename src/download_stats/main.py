@@ -71,6 +71,16 @@ def versions_table(data: list, package: str) -> None:
     console = Console()
     console.print(table)
 
+def combined_downloads(projects):
+    total = 0
+    for p in projects:
+        total += int(stats(p)['total'])
+
+    console = Console()
+    console.print('Total downloads for projects:')
+    console.print(', '.join(projects))
+    console.print('[green]'+str(total)+'[/green]')
+
 def main():
     if len(sys.argv) == 1:
         sys.exit('Package args needed!')
@@ -79,6 +89,9 @@ def main():
     if sys.argv[1].casefold() == '--compare':
         if len(sys.argv) >= 3:
             compare_table(sys.argv[2:])
+    if sys.argv[1].casefold() == '--total':
+        if len(sys.argv) >= 3:
+            combined_downloads(sys.argv[2:])
     if sys.argv[1].casefold() == '--self':
         summary_table('download-stats')
 

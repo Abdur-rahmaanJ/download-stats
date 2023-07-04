@@ -22,6 +22,12 @@ $ download-stats --compare flask django fastapi
 $ download-stats --self # same as `download-stats download-stats`
 ```
 
+Total downloads
+
+```
+$ download-stats --total hooman shopyo download-stats meteomoris newsmoris shopcube honeybot jamstack
+```
+
 ## general
 
 ```python

@@ -12,7 +12,7 @@ import sys
 console = Console()
 
 
-def stats(project: str) -> dict:
+def stats(project: str, no_rich=False) -> dict:
     options = Options()
     options.add_argument('--headless')
     options.add_argument("--incognito")
@@ -32,9 +32,14 @@ def stats(project: str) -> dict:
     userAgent = get_random_user_agent()
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": userAgent})
-    with console.status("[bold green]Getting content...") as status:
+
+    if no_rich:
         driver.get(f'https://pepy.tech/project/{project}')
         time.sleep(5)
+    else:
+        with console.status("[bold green]Getting content...") as status:
+            driver.get(f'https://pepy.tech/project/{project}')
+            time.sleep(5)
 
     try:
         elems = driver.find_elements('xpath', "//*[contains(@class,'MuiGrid-item')]")
