@@ -3,7 +3,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
-from fake_useragent import UserAgent
+# from fake_useragent import UserAgent
+from latest_user_agents import get_random_user_agent
 from rich.console import Console
 import time
 import sys
@@ -24,8 +25,11 @@ def stats(project: str) -> dict:
     options.add_experimental_option('useAutomationExtension', False)
     options.add_argument('--disable-blink-features=AutomationControlled')
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-    ua = UserAgent()
-    userAgent = ua.random
+    
+    #ua = UserAgent()
+    #ua = get_random_user_agent()
+    #userAgent = ua.random
+    userAgent = get_random_user_agent()
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": userAgent})
     with console.status("[bold green]Getting content...") as status:

@@ -1,5 +1,5 @@
 rich
 selenium
-webdriver-manager
+webdriver-manager==3.8.6
+latest-user-agents==0.0.3
 requests
-fake-useragent
