@@ -38,7 +38,7 @@ pygments==2.13.0
     # via rich
 pysocks==1.7.1
     # via urllib3
-python-dotenv==0.20.0
+python-dotenv==1.0.1
     # via webdriver-manager
 requests==2.28.1
     # via
