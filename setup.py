@@ -79,7 +79,7 @@ setup(
     # install_requires=open(os.path.join(here, "reqs", "app.txt"), encoding="utf-8")
     # .read()
     # .split("\n"),  # Optional
-    install_requires=open(os.path.join(here, "reqs", "app.txt"), encoding="utf-8")
+    install_requires=open(os.path.join(here, "reqs", "app.in"), encoding="utf-8")
         .read()
         .split("\n"),
     # extras_require={
