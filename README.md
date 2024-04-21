@@ -2,6 +2,8 @@
 
 View your pypi download stats
 
+Note: Please register for a pepy.tech api key. Add it to the environemnt variable `PEPY_API_KEY`.
+
 # cli
 
 
